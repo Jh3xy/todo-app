@@ -69,6 +69,16 @@ newList.appendChild(checkbox);
          deleteBtn.setAttribute('src', './images/icon-cross.svg')
          deleteBtn.setAttribute('alt', 'delete task')
          deleteBtn.classList.add('delete__task-btn')
+
+         // Delete task functionality
+                deleteBtn.addEventListener("click", ()=>{
+                    let currentList = deleteBtn.closest('li') //Gets current list
+                    //    Feature for later: add to Bin before removing
+                    currentList.remove()
+                    // console.log(currentList)
+
+                })
+
          newList.appendChild(deleteBtn)
 
         //  console.log(newList)
@@ -86,7 +96,7 @@ deleteBtns.forEach(
             let currentList = deleteBtn.closest('li') //Gets current list
             //    Feature for later: add to Bin before removing
             currentList.remove()
-            console.log(currentList)
+            // console.log(currentList)
 
         })
     }
