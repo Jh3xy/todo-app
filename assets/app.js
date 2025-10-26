@@ -10,9 +10,10 @@
 
 let checkboxes = document.querySelectorAll('.checkbox')
 let taskInput = document.getElementById('task-input')
+let taskInputArea = document.querySelector('.task-input-area')
 let taskLists = document.querySelector('.list__tasks')
 let deleteBtns = document.querySelectorAll('.delete__task-btn')
-// console.log(deleteBtns)
+// console.log(taskInputArea)
 
 
 //Check task functionality
@@ -36,8 +37,11 @@ let  btn = document.querySelector('.add-task-btn')
 
 btn.addEventListener("click", () => {
     if (taskInput.value === '') {
-        console.log("invalid");
+        
+        taskInputArea.classList.add('shake-horizontal')
+        // console.log("invalid");
     } else {
+        taskInputArea.classList.remove('shake-horizontal')
         // Get taskInput current value
         let newTask = taskInput.value;
         // console.log(newTask)
