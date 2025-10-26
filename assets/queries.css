@@ -1,0 +1,23 @@
+/* Media Queries */
+
+/* Mobile */
+@media (max-width: 768px) {
+    header{
+         background-image: url(../images/bg-mobile-dark.jpg);
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
