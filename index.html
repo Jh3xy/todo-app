@@ -11,6 +11,7 @@
     <script src="https://kit.fontawesome.com/3b06dad15d.js" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="./assets/styles.css">
+  <link rel="stylesheet" href="./assets/animations.css">
   <link rel="stylesheet" href="./assets/queries.css">
   <script src="./assets/app.js" defer></script>
 
@@ -76,19 +77,18 @@
           <img src="./images/icon-cross.svg" alt="delete task" class="delete__task-btn">
         </li>
       </ul>
-      <div class="status-bar ">
-        <span class="task-status ">
-          <span class="status-count">5</span> items left
-        </span>
-        <span class="sort-tasks flex">
-          <button class="sort-btn all highlight">All</button>
-          <button class="sort-btn active">Active</button>
-          <button class="sort-btn completed">Completed</button>
-        </span>
-        <button class="clear-btn">
-          Clear Completed
-        </button>
+      <div class="status-bar">
+        <span class="items-left">5 items left</span>
+        <div class="filters flex">
+          <button class="filter-btn all highlight" >All</button>
+          <button class="filter-btn active">Active</button>
+          <button class="filter-btn completed">Completed</button>
+        </div>
+        <button class="clear-completed-btn">Clear Completed</button>
       </div>
+      <p class="description">
+        Drag and drop to reorder list
+      </p>
     </div>
    </header>
  

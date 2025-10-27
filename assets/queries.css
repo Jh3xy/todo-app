@@ -11,7 +11,46 @@
     header{
          background-image: url(../images/bg-mobile-dark.jpg);
     }
+    .status-bar {
+    display: grid;
+    grid-template-areas:
+      "items-left clear-completed"
+      "filters filters";
+    grid-template-columns: 1fr auto; /* adjust to taste */
+    grid-template-rows: auto auto;
+    row-gap: 10px;
     
+  }
+  /* .filters {
+    grid-area: filters; 
+    justify-self: center;
+    align-self: center;
+    background-color: var(--color-surface);
+    padding:  1 rem;
+    border-radius: 6px;
+    margin-top: 40px;
+    } */
+    .filters {
+        grid-area: filters;
+        justify-self: center;
+        align-self: start;
+        position: relative;
+        padding-top: 15px; /* 👈 behaves like margin-top visually */
+        width: 100%;
+        justify-content: center;
+  }
+  .filter-btn{
+    padding-top: 1rem;
+  }
+  .filters::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px; /* same as padding-top */
+    background: var(--color-bg); 
+  }
 }
 
 

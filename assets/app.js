@@ -67,6 +67,9 @@ btn.addEventListener("click", () => {
     if (taskInput.value === '') {
         
         taskInputArea.classList.add('shake-horizontal')
+        setTimeout(() => {
+             taskInputArea.classList.remove('shake-horizontal');
+        }, 2000); // time in milliseconds (1000ms = 1 second)
         // console.log("invalid");
     } else {
         taskInputArea.classList.remove('shake-horizontal')
