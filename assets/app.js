@@ -13,7 +13,35 @@ let taskInput = document.getElementById('task-input')
 let taskInputArea = document.querySelector('.task-input-area')
 let taskLists = document.querySelector('.list__tasks')
 let deleteBtns = document.querySelectorAll('.delete__task-btn')
-// console.log(taskInputArea)
+
+
+// Theme toggle feature
+let toggleBtn = document.querySelector('.theme-toggle')
+let body =  document.querySelector('body')
+
+toggleBtn.addEventListener("click", ()=>{
+    body.classList.toggle("dark")
+})
+
+// Testing Restore Task Feature
+ let Bin = []
+ Bin.push(
+    {
+        task: "Create Homework",
+        status: "completed"
+    },
+    {
+       task: "Cleane Room",
+        status: "pending"
+    },
+    {
+       task: "Do Dishes",
+        status: "completed"
+    }
+ )
+// console.log(Bin)
+// console.log(`you have deleted ${Bin.length} tasks`)
+
 
 
 //Check task functionality
@@ -99,8 +127,11 @@ deleteBtns.forEach(
         deleteBtn.addEventListener("click", ()=>{
             let currentList = deleteBtn.closest('li') //Gets current list
             //    Feature for later: add to Bin before removing
+            Bin.push(
+                // Add the task details here
+            )
             currentList.remove()
-            // console.log(currentList)
+            console.log(Bin)
 
         })
     }
