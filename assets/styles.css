@@ -69,6 +69,11 @@ body.dark input{
 img,
 button{
     cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    border: none;
+    color: inherit;
+    background: transparent;
 }
 ul,
 ol,
@@ -93,6 +98,7 @@ body.dark header{
     width: 90%;
     max-width: 400px;
     margin: 0 auto;
+    padding-bottom: 3rem;
     z-index: 999;
 }
 .title{
@@ -217,6 +223,39 @@ input#task-input::placeholder{
 .delete__task-btn{
    width: 16px;
 }
+.status-bar{
+    font-size: .7rem;
+    color:  var(--color-muted);
+    background-color: var(--color-surface);
+    padding: 1rem .8rem;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.status-count{
+
+}
+.sort-tasks{
+    font-size: .8rem;
+    font-weight: 700;
+    
+}
+.highlight{
+    color: var(--blue-500);
+}
+.sort-btn{
+    margin: 0 3px;
+}
+.clear-btn{
+
+
+}
+
+
+
+
+
+
+
 
 
 
