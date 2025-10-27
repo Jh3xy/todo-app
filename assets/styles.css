@@ -16,7 +16,7 @@
   --color-surface: hsl(233, 11%, 84%);
   --color-border: hsl(236, 9%, 61%);
   --color-text: hsl(235, 19%, 35%);
-  --color-muted: hsl(234, 39%, 85%);
+  --color-muted: hsl(235, 14%, 66%);
   --color-error: hsl(0, 84%, 60%);
     --color-error-bg: hsl(0, 100%, 97%);
 
@@ -59,6 +59,12 @@ body{
 }
 body  .theme-toggle{
      background: url(../images/icon-moon.svg) no-repeat center / 90%;
+}
+input{
+    caret-color:  var(--color-muted);
+}
+body.dark input{
+    caret-color:  var(--blue-500);
 }
 img,
 button{
@@ -106,6 +112,7 @@ h1{
     background-color: var(--color-surface) ;
     border-radius: 6px;
     padding: .8rem;
+    border: 1px solid var(--color-text);
 }
 .add-task-btn{
     width: 24px;
@@ -127,13 +134,10 @@ h1{
     position: absolute;
     font-size: 11px;
     top: 6px;
-    right: 6px;
+    right: 5px;
     color: white;
     z-index: 90;
-    opacity: 0;
-}
-.add-task-btn:hover .enter-icon{
-    opacity: 1;
+    color:  var(--color-text);
 }
 input#task-input{
     color:  inherit;
@@ -144,7 +148,7 @@ input#task-input{
     border: none;
 }
 input#task-input::placeholder{
-    color: var(--color-text);
+    color: var(--color-muted);
 }
 /* .list__tasks{
     box-shadow: 2px 4px 25px rgb(0 0 0 / 0.5);
