@@ -74,11 +74,14 @@ li{
    align-items: center;
 }
 header{
-    background-image: url(../images/bg-desktop-dark.jpg);
+    background-image:  url(../images/bg-desktop-light.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 37vh;
     padding-top: 4rem;
+}
+body.dark header{
+    background-image: url(../images/bg-desktop-dark.jpg);
 }
 .container{
     width: 90%;
@@ -110,7 +113,7 @@ h1{
     padding:  5px;
     border-radius: 50%;
     outline: none;
-    border:  1px solid white;
+    border:  1px solid var(--color-text);
     background: transparent;
     position: relative;
 }

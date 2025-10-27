@@ -2,6 +2,12 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+    body header{
+        background-image: url(../images/bg-mobile-light.jpg);
+    }
+    body.dark header{
+        background-image: url(../images/bg-mobile-dark.jpg);
+    }
     header{
          background-image: url(../images/bg-mobile-dark.jpg);
     }
