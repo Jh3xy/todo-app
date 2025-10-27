@@ -8,138 +8,110 @@
 */
 
 
-let checkboxes = document.querySelectorAll('.checkbox')
-let taskInput = document.getElementById('task-input')
-let taskInputArea = document.querySelector('.task-input-area')
-let taskLists = document.querySelector('.list__tasks')
-let deleteBtns = document.querySelectorAll('.delete__task-btn')
+let checkboxes = document.querySelectorAll('.checkbox');
+let taskInput = document.getElementById('task-input');
+let taskInputArea = document.querySelector('.task-input-area');
+let taskLists = document.querySelector('.list__tasks');
+let deleteBtns = document.querySelectorAll('.delete__task-btn');
+let toggleBtn = document.querySelector('.theme-toggle');
+let body = document.querySelector('body');
 
+// Bin feature (for deleted tasks)
+let Bin = [];
 
-// Theme toggle feature
-let toggleBtn = document.querySelector('.theme-toggle')
-let body =  document.querySelector('body')
+// ---- THEME TOGGLE ----
+function handleThemeToggle() {
+  body.classList.toggle('dark');
+}
+toggleBtn.addEventListener('click', handleThemeToggle);
 
-toggleBtn.addEventListener("click", ()=>{
-    body.classList.toggle("dark")
-})
+// ---- CHECK TASK FUNCTIONALITY ----
+function handleToggleCheckbox(e) {
+  const checkbox = e.currentTarget;
+  checkbox.classList.toggle('checked');
+  const parent = checkbox.closest('li');
+  parent.classList.toggle('completed');
+}
 
-// Testing Restore Task Feature
- let Bin = []
- Bin.push(
-    {
-        task: "Create Homework",
-        status: "completed"
-    },
-    {
-       task: "Cleane Room",
-        status: "pending"
-    },
-    {
-       task: "Do Dishes",
-        status: "completed"
-    }
- )
-// console.log(Bin)
-// console.log(`you have deleted ${Bin.length} tasks`)
-
-
-
-//Check task functionality
-checkboxes.forEach(
-    (checkbox) =>{
-        checkbox.addEventListener("click", ()=>{
-            checkbox.classList.toggle("checked")
-
-            // grab the closest li parent
-            const parent = checkbox.closest('li')
-            parent.classList.toggle('completed')
-        })
-    }
-)
-
-// Add Task Functionailty
-let  btn = document.querySelector('.add-task-btn')
-// console.log(taskLists)
-
-// Add Task Functionality
-
-btn.addEventListener("click", () => {
-    if (taskInput.value === '') {
-        
-        taskInputArea.classList.add('shake-horizontal')
-        setTimeout(() => {
-             taskInputArea.classList.remove('shake-horizontal');
-        }, 2000); // time in milliseconds (1000ms = 1 second)
-        // console.log("invalid");
-    } else {
-        taskInputArea.classList.remove('shake-horizontal')
-        // Get taskInput current value
-        let newTask = taskInput.value;
-        // console.log(newTask)
-
-        // Create todo elements
-
-        let newList = document.createElement('li') //create list tag
-        newList.classList.add('list__task', 'flex') //Add classes
-
-        let checkbox = document.createElement('span');
-        checkbox.classList.add('checkbox');
-
-        // Add click listener immediately to new checkboxes
-        checkbox.addEventListener("click", () => {
-        checkbox.classList.toggle("checked");
-        const parent = checkbox.closest('li');
-        parent.classList.toggle('completed');
-        });
-
-newList.appendChild(checkbox);
-
-         
-         let task = document.createElement('span') //Create Task Description
-         task.classList.add('task__description') //Add class
-         task.innerHTML = taskInput.value
-         newList.appendChild(task)
-         
-         let deleteBtn = document.createElement('img')
-         deleteBtn.setAttribute('src', './images/icon-cross.svg')
-         deleteBtn.setAttribute('alt', 'delete task')
-         deleteBtn.classList.add('delete__task-btn')
-
-         // Delete task functionality
-                deleteBtn.addEventListener("click", ()=>{
-                    let currentList = deleteBtn.closest('li') //Gets current list
-                    //    Feature for later: add to Bin before removing
-                    currentList.remove()
-                    // console.log(currentList)
-
-                })
-
-         newList.appendChild(deleteBtn)
-
-        //  console.log(newList)
-        //  Add newList to DOM
-        taskLists.appendChild(newList)
-        taskInput.value = '' //resets input value
-
-    }
+// Attach to existing checkboxes
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('click', handleToggleCheckbox);
 });
 
-// Delete task functionality
-deleteBtns.forEach(
-    (deleteBtn) =>{
-        deleteBtn.addEventListener("click", ()=>{
-            let currentList = deleteBtn.closest('li') //Gets current list
-            //    Feature for later: add to Bin before removing
-            Bin.push(
-                // Add the task details here
-            )
-            currentList.remove()
-            console.log(Bin)
+// ---- DELETE TASK FUNCTIONALITY ----
+function handleDeleteTask(e) {
+  const deleteBtn = e.currentTarget;
+  const currentList = deleteBtn.closest('li');
+  const taskDescription = currentList.querySelector('.task__description').textContent;
 
-        })
-    }
-)
+  // Add deleted task to Bin
+  Bin.push({
+    task: taskDescription,
+    status: currentList.classList.contains('completed') ? 'completed' : 'pending' //Checks if the claasslist contains 'completed'
+  });
 
+  currentList.remove();
+  console.log('Deleted tasks in Bin:', Bin);
+}
+
+// Attach to existing delete buttons
+deleteBtns.forEach((btn) => {
+  btn.addEventListener('click', handleDeleteTask);
+});
+
+// ---- ADD TASK FUNCTIONALITY ----
+function handleAddTask() {
+  if (taskInput.value === '') { //If input value is empty
+    taskInputArea.classList.add('shake-horizontal'); //add shake animation class
+    setTimeout(() => {
+      taskInputArea.classList.remove('shake-horizontal');
+    }, 2000); //remove shake animation class after 2 seconds
+    return;
+  }
+
+  taskInputArea.classList.remove('shake-horizontal');
+  let newTaskText = taskInput.value;
+
+  let newList = document.createElement('li');
+  newList.classList.add('list__task', 'flex');
+
+  // Create and attach checkbox
+  let checkbox = document.createElement('span');
+  checkbox.classList.add('checkbox');
+  checkbox.addEventListener('click', handleToggleCheckbox);
+  newList.appendChild(checkbox);
+
+  // Create and attach task text
+  let task = document.createElement('span');
+  task.classList.add('task__description');
+  task.textContent = newTaskText;
+  newList.appendChild(task);
+
+  // Create and attach delete button
+  let deleteBtn = document.createElement('img');
+  deleteBtn.setAttribute('src', './images/icon-cross.svg');
+  deleteBtn.setAttribute('alt', 'delete task');
+  deleteBtn.classList.add('delete__task-btn');
+  deleteBtn.addEventListener('click', handleDeleteTask);
+  newList.appendChild(deleteBtn);
+
+  // Add to DOM
+  taskLists.appendChild(newList);
+  taskInput.value = '';
+}
+
+// Attach to Add button
+let addTaskBtn = document.querySelector('.add-task-btn');
+addTaskBtn.addEventListener('click', handleAddTask);
+/* Attach to Enter key press */
+/*
+taskInput.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    handleAddTask();
+  }
+});
+*/
 
 
 
