@@ -118,6 +118,19 @@ taskInput.addEventListener('keyup', (e) => {
 
 
 
+let filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        // 1️⃣ Remove highlight from ALL buttons
+        filterBtns.forEach(b => b.classList.remove('highlight'));
+        // 2️⃣ Add highlight to the specific clicked button
+        e.target.classList.add('highlight');
+    })
+})
+
+
+
+
 
 
 
