@@ -25,12 +25,28 @@ function handleThemeToggle() {
 }
 toggleBtn.addEventListener('click', handleThemeToggle);
 
-// ---- CHECK TASK FUNCTIONALITY ----
+//Count tasks
+function updateTaskCount() {
+  const taskList = document.querySelectorAll('.list__task');
+  const taskCount = document.querySelector('.item-count');
+  
+  // Count only uncompleted tasks
+  const activeTasks = Array.from(taskList).filter(task => !task.classList.contains('completed'));
+  
+  taskCount.textContent = activeTasks.length;
+}
+
+
+// ---- CHECK TASK  & TASK COUNT  FUNCTIONALITY----
 function handleToggleCheckbox(e) {
   const checkbox = e.currentTarget;
   checkbox.classList.toggle('checked');
   const parent = checkbox.closest('li');
   parent.classList.toggle('completed');
+
+  updateTaskCount();
+  
+
 }
 
 // Attach to existing checkboxes
@@ -52,6 +68,7 @@ function handleDeleteTask(e) {
 
   currentList.remove();
   console.log('Deleted tasks in Bin:', Bin);
+  updateTaskCount();
 }
 
 // Attach to existing delete buttons
@@ -98,23 +115,14 @@ function handleAddTask() {
   // Add to DOM
   taskLists.appendChild(newList);
   taskInput.value = '';
+
+
+  updateTaskCount();
 }
 
 // Attach to Add button
 let addTaskBtn = document.querySelector('.add-task-btn');
 addTaskBtn.addEventListener('click', handleAddTask);
-/* Attach to Enter key press */
-/*
-taskInput.addEventListener('keyup', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    handleAddTask();
-  }
-});
-*/
-
-
-
 
 
 // Sort logic
@@ -130,15 +138,15 @@ filterBtns.forEach((btn) => {
 })
 
 
-let taskList = document.querySelectorAll('.list__task');
 
 filterBtns.forEach((btn) => {
-    btn.addEventListener("click", ()=>{
-        let filter = btn.getAttribute("data-id")
-        // console.log(filter)
-
-
-        // Now use if statements to determine which lists to show/hide based on filter
+  btn.addEventListener("click", ()=>{
+    let filter = btn.getAttribute("data-id")
+    // console.log(filter)
+    
+    let taskList = document.querySelectorAll('.list__task');
+    
+    // Now use if statements to determine which lists to show/hide based on filter
         taskList.forEach((task)=>{
           if (filter === "all") {
              task.style.display = "flex"; // show everything
@@ -165,7 +173,7 @@ let clearBtn = document.querySelector(".clear-completed-btn")
 clearBtn.addEventListener("click", clearCompletedTasks)
 
 function clearCompletedTasks() {
-  taskList.forEach((task)=>{
+  taskLists.forEach((task)=>{
     if (task.classList.contains('completed')) {
               task.style.display = "none"
               filterBtns.forEach(
@@ -174,7 +182,7 @@ function clearCompletedTasks() {
                   let newBtn = document.getElementById('active'); //selects button with data-id of active
                   newBtn.classList.add("highlight")
                 }
-            )
+              )
             } else {
               task.style.display = "flex"
             }
@@ -182,6 +190,7 @@ function clearCompletedTasks() {
 }
 
 // Write logic for task count
+
 
 
 
