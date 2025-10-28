@@ -117,6 +117,7 @@ taskInput.addEventListener('keyup', (e) => {
 
 
 
+// Sort logic
 
 let filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach((btn) => {
@@ -128,6 +129,59 @@ filterBtns.forEach((btn) => {
     })
 })
 
+
+let taskList = document.querySelectorAll('.list__task');
+
+filterBtns.forEach((btn) => {
+    btn.addEventListener("click", ()=>{
+        let filter = btn.getAttribute("data-id")
+        // console.log(filter)
+
+
+        // Now use if statements to determine which lists to show/hide based on filter
+        taskList.forEach((task)=>{
+          if (filter === "all") {
+             task.style.display = "flex"; // show everything
+          } else if( filter === "active"){
+              // console.log("active lists will show")
+              if (task.classList.contains('completed')) {
+                task.style.display = "none"; // hide completed ones
+             } else {
+                task.style.display = "flex"; // show active ones
+              }
+          } else if(filter === "completed") {
+            if (!task.classList.contains('completed')) {
+              task.style.display = "none"
+            } else {
+              task.style.display = "flex"
+            }
+          }
+        })
+    })
+})
+
+// Logic for clear completed button
+let clearBtn = document.querySelector(".clear-completed-btn")
+clearBtn.addEventListener("click", clearCompletedTasks)
+
+function clearCompletedTasks() {
+  taskList.forEach((task)=>{
+    if (task.classList.contains('completed')) {
+              task.style.display = "none"
+              filterBtns.forEach(
+                (btn)=>{
+                  btn.classList.remove("highlight")
+                  let newBtn = document.getElementById('active'); //selects button with data-id of active
+                  newBtn.classList.add("highlight")
+                }
+            )
+            } else {
+              task.style.display = "flex"
+            }
+  })
+}
+
+// Write logic for task count
 
 
 
